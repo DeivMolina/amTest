@@ -1,0 +1,31 @@
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    margin: 16px;
+    max-width: 400px;
+  }
+  
+  .imageContainer {
+    flex: 0 0 150px;
+  }
+  
+  .image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .details {
+    padding: 16px;
+  }
+  
+  .details h2 {
+    margin: 0 0 8px;
+  }
+  
+  .details p {
+    margin: 4px 0;
+  }
+  
