@@ -7,6 +7,7 @@ import { RootState } from '../store/rootReducer';
 import CharacterCard from '@/components/CharacterCard';
 import FavoritesDropdown from '@/components/FavoritesDropdown';
 import ResponsiveFavoritesDropdown from '@/components/ResponsiveFavoritesDropdown';
+import AddCharacterModal from '@/components/AddCharacterModal';
 import styles from '../styles/page.module.css';
 import { FiBookmark, FiUserPlus } from 'react-icons/fi';
 
@@ -15,7 +16,7 @@ const Page: React.FC = () => {
   const characters = useSelector((state: RootState) => state.characters.characters);
   const loading = useSelector((state: RootState) => state.characters.loading);
   const [filter, setFilter] = useState<'student' | 'staff'>('student');
-  const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCharactersAsync());
@@ -23,6 +24,12 @@ const Page: React.FC = () => {
 
   const handleFilterChange = (newFilter: 'student' | 'staff') => {
     setFilter(newFilter);
+  };
+
+  const handleAddCharacter = (character: any) => {
+    // Aquí puedes agregar la lógica para guardar el nuevo personaje
+    console.log('Nuevo personaje:', character);
+    setIsModalOpen(false);
   };
 
   const filteredCharacters = characters.filter((character) =>
@@ -60,7 +67,7 @@ const Page: React.FC = () => {
       </div>
       <div className={styles.fixedButtonsDesktop}>
         <FavoritesDropdown />
-        <button className={`${styles.fixedButton} ${styles.addButtonDesktop}`}>
+        <button className={`${styles.fixedButton} ${styles.addButtonDesktop}`} onClick={() => setIsModalOpen(true)}>
           AGREGAR <FiUserPlus className={styles.icon} />
         </button>
       </div>
@@ -68,10 +75,12 @@ const Page: React.FC = () => {
       {/* Botones para vista móvil */}
       <div className={styles.fixedButtonsMobile}>
         <ResponsiveFavoritesDropdown />
-        <button className={`${styles.fixedButtonMobile} ${styles.addButtonMobile}`}>
+        <button className={`${styles.fixedButtonMobile} ${styles.addButtonMobile}`} onClick={() => setIsModalOpen(true)}>
           AGREGAR <FiUserPlus className={styles.icon} />
         </button>
       </div>
+
+      <AddCharacterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleAddCharacter} />
     </div>
   );
 };
