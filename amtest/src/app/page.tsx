@@ -1,95 +1,61 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCharactersStart } from '../store/characters'; 
+import { AppState } from '../store/rootReducer'; 
+import CharacterCard from '../components/CharacterCard'; 
+import styles from '../styles/page.module.css'; 
+import { FiBookmark, FiUserPlus } from 'react-icons/fi';
+
+const Page: React.FC = () => {
+  const dispatch = useDispatch();
+  const characters = useSelector((state: AppState) => state.characters.characters);
+  const loading = useSelector((state: AppState) => state.characters.loading);
+
+  useEffect(() => {
+    dispatch(fetchCharactersStart());
+  }, [dispatch]);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <img src="/images/logo.png" alt="Harry Potter" className={styles.logo} />
+        <h1 className={styles.title}>Selecciona tu filtro</h1>
+        <div className={styles.buttons}>
+          <button className={styles.filterButton}>Estudiantes</button>
+          <button className={styles.filterButton}>Staff</button>
         </div>
+      </header>
+      <div className={styles.cardContainer}>
+        {loading ? (
+          <p>Cargando...</p>
+        ) : (
+          characters.map((character) => (
+            <CharacterCard key={character.id} character={character} />
+          ))
+        )}
+      </div>
+      <div className={styles.fixedButtonsDesktop}>
+        <button className={`${styles.fixedButton} ${styles.favoritesButtonDesktop}`}>
+          FAVORITOS <FiBookmark className={styles.icon} />
+        </button>
+        <button className={`${styles.fixedButton} ${styles.addButtonDesktop}`}>
+          AGREGAR <FiUserPlus className={styles.icon} />
+        </button>
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      {/* Botones para vista móvil */}
+      <div className={styles.fixedButtonsMobile}>
+        <button className={`${styles.fixedButton} ${styles.favoritesButtonMobile}`}>
+          FAVORITOS <FiBookmark className={styles.icon} />
+        </button>
+        <button className={`${styles.fixedButton} ${styles.addButtonMobile}`}>
+          AGREGAR <FiUserPlus className={styles.icon} />
+        </button>
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
-}
+};
+
+export default Page;
