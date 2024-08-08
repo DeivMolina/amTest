@@ -1,10 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import charactersReducer from './characters';
+import favoritesReducer from './favoritesSlice';
 
-//Combinar todos los reducers en uno solo.
 const rootReducer = combineReducers({
-    characters: charactersReducer,
+  characters: charactersReducer,
+  favorites: favoritesReducer,
 });
 
-export type AppState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof rootReducer>;
 export default rootReducer;
