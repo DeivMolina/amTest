@@ -2,20 +2,23 @@
 
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCharactersStart } from '../store/characters';
-import { AppState } from '../store/rootReducer';
-import CharacterCard from '../components/CharacterCard';
+import { fetchCharactersAsync } from '@/store/characters';
+import { RootState } from '../store/rootReducer';
+import CharacterCard from '@/components/CharacterCard';
+import FavoritesDropdown from '@/components/FavoritesDropdown';
+import ResponsiveFavoritesDropdown from '@/components/ResponsiveFavoritesDropdown';
 import styles from '../styles/page.module.css';
 import { FiBookmark, FiUserPlus } from 'react-icons/fi';
 
 const Page: React.FC = () => {
   const dispatch = useDispatch();
-  const characters = useSelector((state: AppState) => state.characters.characters);
-  const loading = useSelector((state: AppState) => state.characters.loading);
+  const characters = useSelector((state: RootState) => state.characters.characters);
+  const loading = useSelector((state: RootState) => state.characters.loading);
   const [filter, setFilter] = useState<'student' | 'staff'>('student');
+  const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchCharactersStart());
+    dispatch(fetchCharactersAsync());
   }, [dispatch]);
 
   const handleFilterChange = (newFilter: 'student' | 'staff') => {
@@ -56,9 +59,7 @@ const Page: React.FC = () => {
         )}
       </div>
       <div className={styles.fixedButtonsDesktop}>
-        <button className={`${styles.fixedButton} ${styles.favoritesButtonDesktop}`}>
-          FAVORITOS <FiBookmark className={styles.icon} />
-        </button>
+        <FavoritesDropdown />
         <button className={`${styles.fixedButton} ${styles.addButtonDesktop}`}>
           AGREGAR <FiUserPlus className={styles.icon} />
         </button>
@@ -66,10 +67,8 @@ const Page: React.FC = () => {
 
       {/* Botones para vista móvil */}
       <div className={styles.fixedButtonsMobile}>
-        <button className={`${styles.fixedButton} ${styles.favoritesButtonMobile}`}>
-          FAVORITOS <FiBookmark className={styles.icon} />
-        </button>
-        <button className={`${styles.fixedButton} ${styles.addButtonMobile}`}>
+        <ResponsiveFavoritesDropdown />
+        <button className={`${styles.fixedButtonMobile} ${styles.addButtonMobile}`}>
           AGREGAR <FiUserPlus className={styles.icon} />
         </button>
       </div>
