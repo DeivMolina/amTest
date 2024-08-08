@@ -1,0 +1,86 @@
+    .favoritesDropdown {
+        position: relative;
+    }
+    
+    .toggleButton {
+        background-color: #6B63B5;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 0;
+        border-top-left-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .icon {
+        margin-left: 5px;
+    }
+    
+    .dropdownContent {
+        position: absolute;
+        bottom: 100%; /* Ajuste para que el contenido se expanda hacia arriba */
+        right: 0;
+        left: 0;
+        background-color: #6B63B5;
+        color: white;
+        padding: 10px;
+        border-radius: 10px 10px 0 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 285px;
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: -4; /* Asegúrate de que el menú esté en el frente */
+        transform-origin: bottom;
+        transform: scaleY(0);
+        transition: transform 0.3s ease-in-out;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    
+    .dropdownContent.open {
+        transform: scaleY(1);
+    }
+    
+    .favoriteItem {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .favoriteImage {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    
+    .favoriteName {
+        flex-grow: 1;
+        font-size: 15px;
+        text-align: left;
+    }
+    
+    .removeIcon {
+        cursor: pointer;
+        color: #fff;
+    }
+    
+    .noFavorites {
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    .error {
+        position: absolute;
+        bottom: 1px;
+        left: 10px;
+        right: 10px;
+        font-size: 12px;
+        color: red;
+        text-align: center;
+    }
+    

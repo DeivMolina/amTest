@@ -28,28 +28,28 @@
 
 .filterButton {
   background-color: rgba(0, 0, 0, 0.5);
-  border: 4px solid #6B63B5; 
-  color: white; 
+  border: 4px solid #6B63B5;
+  color: white;
   padding: 10px 20px;
   font-size: 17px;
   cursor: pointer;
   border-radius: 0;
-  text-transform: uppercase; 
-  transition: background-color 0.3s ease, border-color 0.3s ease; 
-  width: 288px; 
-  height: 67px; 
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  width: 288px;
+  height: 67px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .filterButton:hover {
-  background-color: rgba(107, 99, 181, 0.6); 
+  background-color: rgba(107, 99, 181, 0.6);
   border-color: #6B63B5;
 }
 
 .filterButton:active {
-  background-color: #6B63B5; 
+  background-color: #6B63B5;
 }
 
 .cardContainer {
@@ -57,7 +57,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  max-width: 1080px; 
+  max-width: 1080px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -121,8 +121,14 @@
   background-color: #4e4791;
 }
 
+.filterButton.active {
+  background-color: #6B63B5;
+  color: white; 
+}
+
+
 .favoritesButtonDesktop {
-  border-bottom-left-radius: 10px; 
+  border-bottom-left-radius: 10px;
 }
 
 .addButtonDesktop {
@@ -131,4 +137,109 @@
 
 .icon {
   margin-left: 5px;
+}
+
+@media (min-width: 769px) {
+  .fixedButtonsMobile {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .fixedButtonsDesktop {
+    display: none;
+  }
+
+  .fixedButtonsMobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1px;
+    margin: 0 70px;
+    max-width: 285px;
+  }
+
+  .fixedButtonMobile {
+    background-color: #6B63B5;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 0;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+   
+  }
+
+  .fixedButtonMobile:hover {
+    background-color: #5a52a1;
+  }
+
+  .fixedButtonMobile:active {
+    background-color: #4e4791;
+  }
+
+  .favoritesButtonMobile {
+    border-radius: 0;
+    border-top-left-radius: 10px;
+  }
+
+  .addButtonMobile {
+    border-radius: 0;
+    border-top-right-radius: 10px;
+  }
+
+  .card {
+    flex-direction: column;
+    height: auto;
+    max-width: 140px;
+    max-height: 180px;
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: auto;
+    border-radius: 16px 16px 0 0;
+    padding: 10px 0;
+  }
+
+  .image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .details {
+    margin-left: 0;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .header {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-top: 10px;
+  }
+
+  .name {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .status {
+    font-size: 12px;
+  }
+
+  .infoList {
+    display: none;
+  }
 }

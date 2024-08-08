@@ -16,6 +16,9 @@
   position: relative;
 }
 
+.card.deceased {
+  background-color: #999999;
+}
 
 .imageContainer {
   position: relative;
@@ -33,7 +36,7 @@
   width: 165px;
   height: 165px;
   border-radius: 50%;
-  z-index: 1;
+  z-index: 0;
 }
 
 .details {
@@ -62,6 +65,7 @@
   color: #ccc;
   width: 24px;
   height: 24px;
+  cursor: pointer; /* Asegúrate de que el icono es clickeable */
 }
 
 .name {
@@ -85,7 +89,6 @@
 
 /* Estilos específicos para vista móvil */
 @media (max-width: 768px) {
-  
   .card {
     flex-direction: column;
     height: auto;
@@ -121,7 +124,7 @@
 
   .name {
     font-size: 14px;
-    margin-top: px;
+    margin-top: 10px;
   }
 
   .status {
