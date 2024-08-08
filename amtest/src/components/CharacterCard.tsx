@@ -29,7 +29,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
 
     return (
         <div className={styles.cardContainer}>
-            <div className={styles.card} key={character.id}>
+            <div className={`${styles.card} ${!character.alive ? styles.deceased : ''}`} key={character.id}>
             <div className={styles.imageContainer} style={{ background: getHouseColor(character.house) }}>
                 <img src={character.image} alt={character.name} className={styles.image} />
             </div>
